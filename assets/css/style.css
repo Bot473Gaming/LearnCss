@@ -3,6 +3,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 html {
@@ -103,6 +104,8 @@ html {
     margin-right: auto;
 }
 
+#slide .section-img {}
+
 #slide .slide-title {
     margin-bottom: 18px;
 }
@@ -110,12 +113,13 @@ html {
 #slide .slide-img {
     float: left;
     width: 25%;
+    padding: 0 15px;
 }
 
 #slide .img {
-    width: 250px;
+    display: block;
+    width: 100%;
     height: 150px;
-    background-repeat: no-repeat;
 }
 
 #footer {
