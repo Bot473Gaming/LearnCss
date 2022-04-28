@@ -1,0 +1,22 @@
+@media (max-width:1024px) {
+    #content .content-section-img {
+        width: 100% !important;
+    }
+    .content-prg {
+        position: relative;
+    }
+    .s-col-half {
+        float: left;
+        width: 50% !important;
+    }
+}
+
+@media (max-width:740px) {
+    #content .content-section-img {
+        width: 100% !important;
+    }
+    .s-col-half {
+        float: left;
+        width: 100% !important;
+    }
+}

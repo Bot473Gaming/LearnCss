@@ -1,0 +1,21 @@
+@media (max-width: 1024px) {
+    #content .item {
+        width: 48%;
+    }
+    .modern-item {
+        width: 100%;
+    }
+    .content-other .other-item {
+        /* justify-content: left; */
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 739px) {
+    #content .item {
+        width: 98% !important;
+    }
+    #header .header-menu {
+        display: none;
+    }
+}
