@@ -72,7 +72,6 @@ html {
 }
 
 #header .header-menu {
-    overflow: visible !important;
     float: right;
 }
 
@@ -93,11 +92,11 @@ html {
     background-color: #ccc;
 }
 
-#header .header-menu li:hover .sub-menu {
+li:hover .sub-menu {
     display: block;
 }
 
-.header-menu .sub-menu {
+.sub-menu {
     display: none;
     /* display: block; */
     position: absolute;
@@ -105,16 +104,71 @@ html {
     box-shadow: 0 0 3px;
 }
 
-.header-menu .sub-menu li {
+.sub-menu li {
     width: 100%;
     min-width: 120px;
     line-height: 48px;
     padding-left: 8px;
 }
 
-.header-menu .sub-menu li:hover {
+.sub-menu li:hover {
     color: #000;
     background-color: #ccc;
+}
+
+
+/* MENU BUTTON */
+
+.nav {
+    min-width: 200px !important;
+    color: #fff !important;
+    background-color: #363940 !important;
+}
+
+.nav li {
+    padding-left: 18px;
+}
+
+.header-menu-btn {
+    float: right;
+    padding: 0 16.445px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #fff;
+    transform: rotate(90deg);
+    cursor: pointer;
+    display: none;
+}
+
+.header-menu-btn:hover {
+    color: #000;
+    background-color: #ccc;
+}
+
+.header-nav-menu {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 100%;
+    background-color: #363940;
+    /* display: block; */
+    display: none;
+}
+
+.header-nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    padding-left: 18px;
+}
+
+.header-nav-menu li:hover a {
+    color: #000;
+    background-color: #ccc;
+    display: block;
+}
+
+.show-menu {
+    display: block !important;
 }
 
 
@@ -162,7 +216,7 @@ html {
 #content .list-items {
     display: flex;
     /* flex-direction: row; */
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
     flex: 1;
 }
