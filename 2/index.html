@@ -43,6 +43,38 @@
                         </li>
                     </ul>
                 </div>
+                <div class="header-menu-btn" onclick="openNavMenu()">|||</div>
+                <div id="nav-menu" class="header-nav-menu">
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li>
+                            <a href="#">Portfolio ▼</a>
+                            <ul class="sub-menu nav">
+                                <li>NAV1</li>
+                                <li>NAV1</li>
+                                <li>NAV1</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Blog ▼</a>
+                            <ul class="sub-menu nav">
+                                <li>NAV2</li>
+                                <li>NAV2</li>
+                                <li>NAV2</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Other Pages ▼</a>
+                            <ul class="sub-menu nav">
+                                <li>NAV3</li>
+                                <li>NAV3</li>
+                                <li>NAV3</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <!--  -->
@@ -170,17 +202,20 @@
 
                 </div>
             </div>
-
-
         </div>
         <!--  -->
         <div id="footer">
             <div class="container">Copyright © Your Webside 2017</div>
         </div>
-
-
     </div>
-
+    <script>
+        function openNavMenu() {
+            var x = document.getElementById('nav-menu');
+            if (x.className.indexOf("show-menu") == -1) {
+                x.className += " show-menu";
+            } else x.className = x.className.replace(" show-menu", "");
+        }
+    </script>
 </body>
 
 </html>
