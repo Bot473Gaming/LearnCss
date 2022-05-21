@@ -8,6 +8,17 @@
     .msg-img {
         width: 30%;
     }
+    .ct-text {
+        float: none;
+        width: 100% !important;
+        display: table;
+        text-align: center;
+    }
+    .ct-btn {
+        float: none;
+        display: table;
+        margin: 0 auto;
+    }
 }
 
 @media (max-width: 970px) {
