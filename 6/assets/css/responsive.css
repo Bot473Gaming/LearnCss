@@ -53,7 +53,8 @@
     .header-nav {
         display: none;
     }
-    .header-btn {
+    .header-btn,
+    .in {
         display: block;
     }
     .item {
