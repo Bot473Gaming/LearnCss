@@ -241,7 +241,7 @@ p {
 .home-model {
     max-width: 500px;
     margin: 50px auto 0;
-    /* margin-bottom: -4px; */
+    max-width: 100%;
     float: right;
 }
 
