@@ -81,3 +81,13 @@
         width: 100%;
     }
 }
+
+@media (max-width: 456px) {
+    .item-icon {
+        display: none;
+    }
+    .item-title,
+    .item-desc {
+        text-align: center;
+    }
+}
