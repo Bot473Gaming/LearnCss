@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calc</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div id="main">
+        <div class="container">
+            <div id="header">
+
+            </div>
+            <div id="content">
+                <div class="display">
+                    <div class="display-show"></div>
+                    <div class="display-ans"></div>
+                </div>
+            </div>
+            <div id="input">
+                <ul class="number">
+                    <li class="btn" onclick="inputs('7')">7</li>
+                    <li class="btn" onclick="inputs('8')">8</li>
+                    <li class="btn" onclick="inputs('9')">9</li>
+                    <li class="btn" onclick="inputs('4')">4</li>
+                    <li class="btn" onclick="inputs('5')">5</li>
+                    <li class="btn" onclick="inputs('6')">6</li>
+                    <li class="btn" onclick="inputs('1')">1</li>
+                    <li class="btn" onclick="inputs('2')">2</li>
+                    <li class="btn" onclick="inputs('3')">3</li>
+                    <li class="btn" style="width: 60%;" onclick="inputs('0')">0</li>
+                    <li class="btn" style="width: 34%;" onclick="inputs('.')">.</li>
+                </ul>
+                <ul class="func">
+                    <li class="f-btn" style="color: #fff;background-color: red" onclick="remove(1)">DEL</li>
+                    <li class="f-btn" style="color: #fff;background-color: red" onclick="remove(2)">AC</li>
+                    <li class="f-btn" onclick="inputs('*')">*</li>
+                    <li class="f-btn" onclick="inputs('/')">/</li>
+                    <li class="f-btn" onclick="inputs('+')">+</li>
+                    <li class="f-btn" onclick="inputs('-')">-</li>
+                    <li class="f-btn" style="width: 100%;" onclick="showAns()">=</li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+    <script src="./assets/js/index.js"></script>
+</body>
+
+</html>

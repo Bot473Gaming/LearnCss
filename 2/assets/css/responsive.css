@@ -1,12 +1,22 @@
-@media (min-width: 1025) {
-    #header {
-        overflow: hidden;
+@media (min-width: 1025px) {
+    #nav-menu {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 740px) {
+    #nav-menu {
+        display: none !important;
     }
 }
 
 @media (max-width: 1024px) {
     #content .item {
         width: 48%;
+    }
+    #content .content-list-items-one .item:last-child {
+        /* margin: 0 auto; */
+        width: 100%;
     }
     .modern-item {
         width: 100%;

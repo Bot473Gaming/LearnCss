@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="container">
+            <div id="content"></div>
+            <!-- <div class="btn"></div> -->
+        </div>
+    </div>
+    <script>
+        var map = [];
+
+        for (var i = 0; i <= 10; i++) {
+            map[i] = new Array(10);
+        }
+        var number //prompt("Nhap size:");
+        $(document).ready(function() {
+            number = prompt("Nhap size 2-9:");
+            var html = "";
+            var color = 'yellow';
+            var j = 1;
+            for (var i = 1; i <= number * number; i++) {
+                let j = i;
+                let y = Math.floor(j / number) + 1 * (!(j % number == 0));
+                let x = j % number + number * (j % number == 0);
+
+                map[x][y] = 1;
+                //console.log(x, y)
+
+                html += `<button type="button" class='btn ${color}' onclick='mainFunction(${i})'></button>`;
+                if (i % number == 0) {
+                    html += "</br>";
+                }
+            }
+            $("#content").html(html);
+        });
+
+        function change(x, y) {
+            if (x >= 1 && y >= 1) {
+                map[x][y] = -map[x][y];
+                //console.log(x, y, map[x][y])
+            }
+        }
+
+        function check() {
+            var cnt = 0;
+            for (let i = 1; i <= number; i++) {
+                for (let j = 1; j <= number; j++) {
+                    cnt += (map[i][j] == -1);
+                }
+            }
+            console.log(cnt)
+            return cnt >= number * number;
+        }
+
+        function mainFunction(id) {
+            let y = Math.floor(id / number) + 1 * (!(id % number == 0));
+            let x = id % number + number * (id % number == 0);
+            //console.log(x, y)
+            change(x + 1, y);
+            change(x + 1, y - 1);
+            change(x + 1, y + 1);
+            change(x, y - 1);
+            change(x, y + 1);
+            change(x - 1, y);
+            change(x - 1, y - 1);
+            change(x - 1, y + 1);
+            var html = document.getElementsByClassName('btn');
+
+            for (var i = 1; i <= number * number; i++) {
+                let color = 'yellow';
+                let j = i;
+                let y = Math.floor(j / number) + 1 * (!(j % number == 0));
+                let x = j % number + number * (j % number == 0);
+                if (map[x][y] == -1) {
+                    color = 'red';
+                }
+                var cl = html[i - 1].className.split(' ');
+                cl[1] = color;
+                html[i - 1].className = cl.join(' ');
+
+            }
+            if (check()) {
+                alert('Win')
+            }
+        }
+    </script>
+
+</body>
+
+</html>
