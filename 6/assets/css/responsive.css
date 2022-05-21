@@ -40,9 +40,16 @@
         float: none;
         /* margin: 0 auto; */
     }
+    .ct-text {
+        display: block !important;
+        text-align: center;
+    }
 }
 
 @media (max-width: 756px) {
+    .rows {
+        display: inline;
+    }
     .header-nav {
         display: none;
     }
@@ -62,6 +69,14 @@
     }
     .ab-img,
     .ab-body {
+        float: none;
+        width: 100%;
+    }
+    .footer-text,
+    .footer-link,
+    .footer-link>ul {
+        justify-content: center;
+        text-align: center;
         float: none;
         width: 100%;
     }

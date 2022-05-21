@@ -395,11 +395,17 @@ p {
 
 .footer-link {
     width: 30%;
-    display: inline-block;
+    /* display: inline-block; */
+}
+
+.footer-link>ul {
+    display: flex;
+    justify-content: end;
 }
 
 .footer-link>ul>li {
-    display: inline-block;
+    display: flex;
+    /* display: inline-block; */
     margin-right: 10px;
 }
 
