@@ -4,12 +4,14 @@ function tog_nav() {
 }
 
 function isScrolledIntoView(elem) {
-    var docViewTop = $(window).scrollTop();
+    var docViewTop = $(window).scrollTop() + 80;
     var docViewBottom = docViewTop + $(window).height();
 
     var elemTop = $(elem).offset().top;
     var elemBottom = elemTop + $(elem).height();
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+    console.log(docViewTop, docViewBottom)
+    console.log(elem, elemTop, elemBottom)
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop)) || ((elemBottom >= docViewTop) && (elemTop <= docViewTop - (elemBottom - docViewTop)));
 };
 
 function isScrolled(elem) {
@@ -94,9 +96,10 @@ $(window).scroll(function() {
     }
     if (isScrolledIntoView($('.ab-img'))) {
         $('.ab-img').addClass('fadeInLeft');
+    }
+    if (isScrolledIntoView($('.ab-body'))) {
         $('.ab-body').addClass('fadeInRight');
     }
-
 });
 
 //fadeInRight

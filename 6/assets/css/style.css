@@ -9,6 +9,8 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
     scroll-behavior: smooth;
+    font-family: 'Lato', sans-serif;
+    ;
 }
 
 body {
@@ -375,6 +377,7 @@ p {
 .ab-body {
     visibility: hidden;
     width: 66%;
+    display: block;
 }
 
 .ab-body>h2 {
