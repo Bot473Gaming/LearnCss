@@ -1,0 +1,135 @@
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.clear {
+    clear: both;
+}
+
+.wall {
+    width: 600px;
+    height: 600px;
+    border: 12px solid rgb(185, 1, 1);
+    border-radius: 4px;
+}
+
+.tank-ctn {
+    /* display: block; */
+    position: fixed;
+    width: 50px;
+    height: 55px;
+    z-index: 3;
+    /* margin: 18px; */
+    /* background-color: aquamarine; */
+}
+
+.tag-player {
+    font-size: 16px;
+    line-height: 16px;
+    position: absolute;
+    top: -18px;
+    width: 100%;
+    text-align: center;
+}
+
+.tank {
+    width: 50px;
+    height: 50px;
+    /* background-color: aqua; */
+    /* transform: rotate(90deg); */
+}
+
+.tank .body {
+    margin-top: 19px;
+    float: left;
+    height: 20px;
+    width: 20px;
+    background-color: #000;
+}
+
+.tank .wheel {
+    /* justify-self:center; */
+    float: left;
+    width: 15px;
+    height: 50px;
+    background-color: black;
+}
+
+.hp-bg {
+    height: 5px;
+    width: 50px;
+    background-color: rgb(255, 72, 72);
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.hp-bg .hp {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(75, 255, 75);
+    border-radius: inherit;
+}
+
+.bullet {
+    position: fixed;
+    width: 10px;
+    height: 25px;
+    border-radius: 4px 4px 0 0;
+    /* transform: rotate(90deg); */
+    background-color: rgb(255, 86, 86);
+}
+
+.hd {
+    float: right;
+    margin-top: -500px;
+    margin-right: 10px;
+}
+
+.hd h3 {
+    margin-left: 12px;
+}
+
+.hd p {
+    margin-left: 18px;
+}
+
+.che {
+    display: block;
+    position: fixed;
+    color: aqua;
+}
+
+.reset {
+    display: none;
+    z-index: 4;
+    position: fixed;
+    left: 250px;
+    top: 200px;
+}
+
+.reset a {
+    text-decoration: none;
+    color: #000;
+    font-size: 42px;
+}
+
+.win {
+    z-index: 4;
+    position: fixed;
+    top: 150px;
+    left: 255px;
+    font-size: 32px;
+    color: rgb(74, 255, 74);
+}
+
+.in {
+    display: block !important;
+}
