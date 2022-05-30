@@ -84,7 +84,7 @@ function changePosBullet(x, y, h) {
 
 function getPosForCheck(pl) {
     let x1 = parseInt(String(pl.style.left).replace('px', '')),
-        y1 = parseInt(String(pl.style.top).replace('px', '')) + 5;
+        y1 = parseInt(String(pl.style.top).replace('px', ''));
     let x2 = x1 + 50,
         y2 = y1 + 50;
     return { x1: x1, x2: x2, y1: y1, y2: y2 };
