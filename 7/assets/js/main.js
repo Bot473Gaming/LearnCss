@@ -33,9 +33,9 @@ function delay(ms) {
 function outWall(pos) {
     if (pos > 535 || pos < 12) {
         if (pos > 535) {
-            pos -= 5;
+            pos = 535;
         } else {
-            pos += 5;
+            pos = 12;
         }
     }
     return pos;
@@ -59,7 +59,7 @@ function getAndchoose(x, y, h) {
             break;
         case 1:
             x += 65;
-            y += 20;
+            y += 15;
             break;
         case 2:
             x += 20;
@@ -67,7 +67,7 @@ function getAndchoose(x, y, h) {
             break;
         case 3:
             x -= 20;
-            y += 20;
+            y += 15;
     }
     return { x: x + 'px', y: y + 'px' };
 }
@@ -92,16 +92,16 @@ function changePosBullet(x, y, h) {
 function ccc(x, y, h) {
     switch (h) {
         case 0:
-            y += 5;
+            y += 2;
             break;
         case 1:
-            x -= 5;
+            x -= 2;
             break;
         case 2:
-            y -= 5;
+            y -= 2;
             break;
         case 3:
-            x += 5;
+            x += 2;
     }
     return { x: x + 'px', y: y + 'px' };
 }
@@ -139,16 +139,6 @@ function isCollect(x, y) {
                 let h = parseInt(temp.pop());
                 let index = parseInt(temp.pop());
                 let pos = changePosBullet(x, y, h);
-                if (isCollect(bullet, document.getElementsByClassName('tank')[0]) || isCollect(bullet, document.getElementsByClassName('tank')[1])) {
-                    // console.log('collection');
-                    if (isCollect(bullet, document.getElementsByClassName('tank')[0])) {
-                        hp1 -= 10;
-                    } else {
-                        hp2 -= 10;
-                    }
-                    bullet.remove();
-                    continue;
-                }
                 if (isoutWall(pos.x) || isoutWall(pos.y) || isCollect(bullet, $('.wl'))) {
                     bullet.remove();
                     continue;
@@ -158,6 +148,15 @@ function isCollect(x, y) {
                         hpf1 -= 10;
                     } else {
                         hpf2 -= 10;
+                    }
+                    bullet.remove();
+                    continue;
+                }
+                if (isCollect(bullet, document.getElementsByClassName('tank')[0]) || isCollect(bullet, document.getElementsByClassName('tank')[1])) {
+                    if (isCollect(bullet, document.getElementsByClassName('tank')[0])) {
+                        hp1 -= 10;
+                    } else {
+                        hp2 -= 10;
                     }
                     bullet.remove();
                     continue;
@@ -180,14 +179,14 @@ function isCollect(x, y) {
     var tx = setInterval(function() {
         if (!isf1) {
             d1++;
-            if (d1 >= 20) {
+            if (d1 >= 5) {
                 d1 = 0;
                 isf1 = true;
             }
         }
         if (!isf2) {
             d2++;
-            if (d2 >= 20) {
+            if (d2 >= 5) {
                 d2 = 0;
                 isf2 = true;
             }
@@ -196,9 +195,7 @@ function isCollect(x, y) {
         hp2 = Math.max(0, hp2);
 
         if (!hp1 || !hp2) {
-            console.log('end')
             let pbg = document.getElementsByClassName('tank-ctn');
-
             if (!hp1) {
                 pbg[0].style.left = '275px';
                 pbg[0].style.top = '200px';
@@ -212,148 +209,170 @@ function isCollect(x, y) {
         if (!hpf1 || !hpf2) {
             game = false;
             document.getElementsByClassName('reset')[0].classList.add('in')
-            document.getElementsByClassName('win')[0].innerHTML = 'P2 WIN';
-            document.getElementsByClassName('win')[0].innerHTML = 'P1 WIN'
+            if (!hpf1) {
+                document.getElementsByClassName('win')[0].innerHTML = 'P2 WIN';
+            } else {
+                document.getElementsByClassName('win')[0].innerHTML = 'P1 WIN'
+            }
             clearInterval(tx);
-
         }
-        // console.log(d1, d2)
     }, 50);
 })();
 ////
-console.log(getPos($('.tank').eq(1)))
 var keys = {};
 document.onkeydown = document.onkeyup = (event) => {
-    // console.log(event.keyCode)
-    // console.log(event.type)
     if (!game) {
         return;
     }
     if (event.type == 'keydown') {
         keys[event.keyCode] = true;
-
     }
     // console.log(keys)
     if (event.type == 'keyup') {
         keys[event.keyCode] = false;
+    }
+};
+var xxx = setInterval(() => {
+    if (!game) {
+        clearInterval(xxx);
+    }
+    var p1 = document.getElementsByClassName('tank')[0],
+        p2 = document.getElementsByClassName('tank')[1],
+        pbg1 = document.getElementsByClassName('tank-ctn')[0],
+        pbg2 = document.getElementsByClassName('tank-ctn')[1],
+        hpp = document.getElementsByClassName('hp');
 
+    if (keys[39]) {
+        //right
+        h1 = 1;
+        let pos = parseInt(String(pbg1.style.left).replace('px', '')) + 2;
+        pos = outWall(pos);
+        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
+            pos -= 2;
+        }
+        pbg1.style.left = pos + 'px';
+    }
+    if (keys[37]) {
+        //left
+        h1 = 3;
+        let pos = parseInt(String(pbg1.style.left).replace('px', '')) - 2;
+        pos = outWall(pos);
+        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
+            pos += 2;
+        }
+        pbg1.style.left = pos + 'px';
+    }
+    if (keys[40]) {
+        //down
+        h1 = 2;
+        let pos = parseInt(String(pbg1.style.top).replace('px', '')) + 2;
+        pos = outWall(pos);
+        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
+            pos -= 2;
+        }
+        pbg1.style.top = pos + 'px';
+    }
+    if (keys[38]) {
+        //up
+        h1 = 0;
+        let pos = parseInt(String(pbg1.style.top).replace('px', '')) - 2;
+        pos = outWall(pos);
+        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
+            pos += 2;
+        }
+        pbg1.style.top = pos + 'px';
     }
 
-};
-var xxx = setInterval(async() => {
-        if (!game) {
-            clearInterval(xxx);
-        }
-        var p1 = document.getElementsByClassName('tank')[0],
-            p2 = document.getElementsByClassName('tank')[1],
-            pbg1 = document.getElementsByClassName('tank-ctn')[0],
-            pbg2 = document.getElementsByClassName('tank-ctn')[1],
-            hpp = document.getElementsByClassName('hp');
-
-        if (keys[39]) {
-            //right
-            h1 = 1;
-            let pos = parseInt(String(pbg1.style.left).replace('px', '')) + 2;
-            pos = outWall(pos);
-            pbg1.style.left = pos + 'px';
-        }
-        if (keys[37]) {
-            //left
-            h1 = 3;
-            let pos = parseInt(String(pbg1.style.left).replace('px', '')) - 2;
-            pos = outWall(pos);
-            pbg1.style.left = pos + 'px';
-        }
-        if (keys[40]) {
-            //down
-            h1 = 2;
-            let pos = parseInt(String(pbg1.style.top).replace('px', '')) + 2;
-            pos = outWall(pos);
-            pbg1.style.top = pos + 'px';
-        }
-        if (keys[38]) {
-            //up
-            h1 = 0;
-            let pos = parseInt(String(pbg1.style.top).replace('px', '')) - 2;
-            pos = outWall(pos);
-            pbg1.style.top = pos + 'px';
-        }
-
-        ////
-        if (keys[68]) {
-            //right
-            h2 = 1;
-            let pos = parseInt(String(pbg2.style.left).replace('px', '')) + 2;
-            pos = outWall(pos);
-            pbg2.style.left = pos + 'px';
-        }
-        if (keys[65]) {
-            //left
-
-            h2 = 3;
-            let pos = parseInt(String(pbg2.style.left).replace('px', '')) - 2;
-            pos = outWall(pos);
-            pbg2.style.left = pos + 'px';
-        }
-        if (keys[83]) {
-            //down
-            h2 = 2;
-            let pos = parseInt(String(pbg2.style.top).replace('px', '')) + 2;
-            pos = outWall(pos);
-            pbg2.style.top = pos + 'px';
-        }
-        if (keys[87]) {
-            //up
-            h2 = 0;
-            let pos = parseInt(String(pbg2.style.top).replace('px', '')) - 2;
-            pos = outWall(pos);
-            pbg2.style.top = pos + 'px';
-        }
-
-        if (keys[32] && isf2) {
-            isf2 = false;
-            let wallGame = document.getElementsByClassName('wall')[0];
-            wallGame.innerHTML += `<div class="bullet ${++slbl} ${h2}"></div>`
-            let bl = document.getElementsByClassName('bullet');
-            let pos = getAndchoose(pbg2.style.left, pbg2.style.top, h2);
-            bl[bl.length - 1].style.left = pos.x;
-            bl[bl.length - 1].style.top = pos.y;
-            bl[bl.length - 1].style.transform = `rotate(${rota[h2]}deg)`;
-        }
-        if (keys[13] && isf1) {
-            isf1 = false;
-            let wallGame = document.getElementsByClassName('wall')[0];
-            wallGame.innerHTML += `<div class="bullet ${++slbl} ${h1}"></div>`
-            let bl = document.getElementsByClassName('bullet');
-            let pos = getAndchoose(pbg1.style.left, pbg1.style.top, h1);
-            bl[bl.length - 1].style.left = pos.x;
-            bl[bl.length - 1].style.top = pos.y;
-            bl[bl.length - 1].style.transform = `rotate(${rota[h1]}deg)`;
-            console.log(hpf1, hpf2)
-        }
-        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
-            let x = parseInt(String(pbg1.style.left).replace('px', ''));
-            let y = parseInt(String(pbg1.style.top).replace('px', ''));
-            let pos = ccc(x, y, h1);
-            pbg1.style.left = pos.x;
-            pbg1.style.top = pos.y;
-
-        }
+    ////
+    if (keys[68]) {
+        //right
+        h2 = 1;
+        let pos = parseInt(String(pbg2.style.left).replace('px', '')) + 2;
+        pos = outWall(pos);
         if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
-            let x = parseInt(String(pbg2.style.left).replace('px', ''));
-            let y = parseInt(String(pbg2.style.top).replace('px', ''));
-            let pos = ccc(x, y, h2);
-            pbg2.style.left = pos.x;
-            pbg2.style.top = pos.y;
+            pos -= 2;
         }
-        hpp[2].style.width = hpf1 / 3 + '%';
-        hpp[3].style.width = hpf2 / 3 + '%';
-        hpp[0].style.width = hp1 + '%';
-        hpp[1].style.width = hp2 + '%';
-        p1.style.transform = `rotate(${rota[h1]}deg)`
-        p2.style.transform = `rotate(${rota[h2]}deg)`
-    }, 1)
-    // document.addEventListener('keyup', (event) => {
-    //     console.log(keys)
+        pbg2.style.left = pos + 'px';
+    }
+    if (keys[65]) {
+        //left
 
-// });
+        h2 = 3;
+        let pos = parseInt(String(pbg2.style.left).replace('px', '')) - 2;
+        pos = outWall(pos);
+        if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
+            pos += 2;
+        }
+        pbg2.style.left = pos + 'px';
+    }
+    if (keys[83]) {
+        //down
+        h2 = 2;
+        let pos = parseInt(String(pbg2.style.top).replace('px', '')) + 2;
+        pos = outWall(pos);
+        if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
+            pos -= 2;
+        }
+        pbg2.style.top = pos + 'px';
+    }
+    if (keys[87]) {
+        //up
+        h2 = 0;
+        let pos = parseInt(String(pbg2.style.top).replace('px', '')) - 2;
+        pos = outWall(pos);
+        if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
+            pos += 2;
+        }
+        pbg2.style.top = pos + 'px';
+    }
+
+    if (keys[32] && isf2) {
+        isf2 = false;
+        let wallGame = document.getElementsByClassName('wall')[0];
+        wallGame.innerHTML += `<div class="bullet ${++slbl} ${h2}"></div>`
+        let bl = document.getElementsByClassName('bullet');
+        let pos = getAndchoose(pbg2.style.left, pbg2.style.top, h2);
+        bl[bl.length - 1].style.left = pos.x;
+        bl[bl.length - 1].style.top = pos.y;
+        bl[bl.length - 1].style.transform = `rotate(${rota[h2]}deg)`;
+    }
+    if (keys[13] && isf1) {
+        isf1 = false;
+        let wallGame = document.getElementsByClassName('wall')[0];
+        wallGame.innerHTML += `<div class="bullet ${++slbl} ${h1}"></div>`
+        let bl = document.getElementsByClassName('bullet');
+        let pos = getAndchoose(pbg1.style.left, pbg1.style.top, h1);
+        bl[bl.length - 1].style.left = pos.x;
+        bl[bl.length - 1].style.top = pos.y;
+        bl[bl.length - 1].style.transform = `rotate(${rota[h1]}deg)`;
+        console.log(hpf1, hpf2)
+    }
+
+    hpp[2].style.width = hpf1 / 3 + '%';
+    hpp[3].style.width = hpf2 / 3 + '%';
+
+    hpp[0].style.width = hp1 + '%';
+    hpp[1].style.width = hp2 + '%';
+    p1.style.transform = `rotate(${rota[h1]}deg)`
+    p2.style.transform = `rotate(${rota[h2]}deg)`
+    if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
+        let x = parseInt(String(pbg1.style.left).replace('px', ''));
+        let y = parseInt(String(pbg1.style.top).replace('px', ''));
+        let pos = ccc(x, y, h1);
+        pbg1.style.left = outWall(pos.x);
+        pbg1.style.top = outWall(pos.y);
+    }
+    if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
+        let x = parseInt(String(pbg2.style.left).replace('px', ''));
+        let y = parseInt(String(pbg2.style.top).replace('px', ''));
+        let pos = ccc(x, y, h2);
+        pbg2.style.left = outWall(pos.x);
+        pbg2.style.top = outWall(pos.y);
+    }
+
+    let pos2 = { y: outWall(parseInt(String(pbg2.style.top).replace('px', ''))), x: outWall(parseInt(String(pbg2.style.left).replace('px', ''))) };
+    pbg1.style.left = pos1.x;
+    pbg1.style.top = pos1.y;
+    pbg2.style.left = pos2.x;
+    pbg2.style.top = pos2.y;
+}, 0)
