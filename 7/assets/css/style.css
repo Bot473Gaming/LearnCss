@@ -25,7 +25,7 @@ html {
     /* display: block; */
     position: fixed;
     width: 50px;
-    height: 55px;
+    height: 50px;
     z-index: 3;
     /* margin: 18px; */
     /* background-color: aquamarine; */
@@ -35,7 +35,7 @@ html {
     font-size: 16px;
     line-height: 16px;
     position: absolute;
-    top: -18px;
+    top: -25px;
     width: 100%;
     text-align: center;
 }
@@ -43,8 +43,6 @@ html {
 .tank {
     width: 50px;
     height: 50px;
-    /* background-color: aqua; */
-    /* transform: rotate(90deg); */
 }
 
 .tank .body {
@@ -64,11 +62,14 @@ html {
 }
 
 .hp-bg {
+    position: absolute;
+    top: -8px;
     height: 5px;
     width: 50px;
     background-color: rgb(255, 72, 72);
+    /* transform: translateY(-5px); */
     border-radius: 4px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .hp-bg .hp {
@@ -117,7 +118,7 @@ html {
 
 .reset a {
     text-decoration: none;
-    color: #000;
+    color: rgb(141, 141, 141);
     font-size: 42px;
 }
 
@@ -132,4 +133,31 @@ html {
 
 .in {
     display: block !important;
+}
+
+.fb-hp {
+    width: 150px !important;
+    height: 8px !important;
+    transform: translateX(-35px) !important;
+}
+
+.f-hp {
+    width: 100%;
+}
+
+.fort {
+    width: 80px;
+    height: 60px;
+    background-color: crimson;
+    text-align: center;
+    position: fixed;
+}
+
+.wl {
+    position: relative;
+    top: 302px;
+    margin: 0 auto;
+    width: 40%;
+    height: 20px;
+    background-color: rgb(185, 1, 1);
 }
