@@ -142,7 +142,7 @@ function isCollect(x, y) {
             // console.log(error)
         }
 
-    }, 10);
+    }, 5);
     // }
 })();
 
@@ -182,117 +182,118 @@ function isCollect(x, y) {
     }, 50);
 })();
 ////
-document.addEventListener('keydown', function(event) {
+var keys = {};
+document.onkeydown = document.onkeyup = (event) => {
     // console.log(event.keyCode)
+    // console.log(event.type)
+    if (event.type == 'keydown') {
+        keys[event.keyCode] = true;
+
+    }
     if (!game) {
         return;
     }
-    var p1 = document.getElementsByClassName('tank')[0],
-        p2 = document.getElementsByClassName('tank')[1],
-        pbg1 = document.getElementsByClassName('tank-ctn')[0],
-        pbg2 = document.getElementsByClassName('tank-ctn')[1],
-        hpp1 = document.getElementsByClassName('hp')[0],
-        hpp2 = document.getElementsByClassName('hp')[1]
+    // console.log(keys)
+    if (event.type == 'keyup') {
+        keys[event.keyCode] = false;
 
-    if (event.keyCode == 39) {
-        //right
-        h1 = 1;
-        let pos = parseInt(String(pbg1.style.left).replace('px', '')) + 5;
-        pos = outWall(pos);
-        pbg1.style.left = pos + 'px';
-    }
-    if (event.keyCode == 37) {
-        //left
-        h1 = 3;
-        let pos = parseInt(String(pbg1.style.left).replace('px', '')) - 5;
-        pos = outWall(pos);
-        pbg1.style.left = pos + 'px';
-    }
-    if (event.keyCode == 40) {
-        //down
-        h1 = 2;
-        let pos = parseInt(String(pbg1.style.top).replace('px', '')) + 5;
-        pos = outWall(pos);
-        pbg1.style.top = pos + 'px';
-    }
-    if (event.keyCode == 38) {
-        //up
-        h1 = 0;
-        let pos = parseInt(String(pbg1.style.top).replace('px', '')) - 5;
-        pos = outWall(pos);
-        pbg1.style.top = pos + 'px';
     }
 
-    ////
-    if (event.keyCode == 68) {
-        //right
-        h2 = 1;
-        let pos = parseInt(String(pbg2.style.left).replace('px', '')) + 5;
-        pos = outWall(pos);
-        pbg2.style.left = pos + 'px';
-    }
-    if (event.keyCode == 65) {
-        //left
-        h2 = 3;
-        let pos = parseInt(String(pbg2.style.left).replace('px', '')) - 5;
-        pos = outWall(pos);
-        pbg2.style.left = pos + 'px';
-    }
-    if (event.keyCode == 83) {
-        //down
-        h2 = 2;
-        let pos = parseInt(String(pbg2.style.top).replace('px', '')) + 5;
-        pos = outWall(pos);
-        pbg2.style.top = pos + 'px';
-    }
-    if (event.keyCode == 87) {
-        //up
-        h2 = 0;
-        let pos = parseInt(String(pbg2.style.top).replace('px', '')) - 5;
-        pos = outWall(pos);
-        pbg2.style.top = pos + 'px';
-    }
-    // console.log('keydown')
-    // console.log(pbg1.style.left,
-    //     pbg1.style.top, '||',
-    //     pbg2.style.left,
-    //     pbg2.style.top)
-    // console.log(hp1)
+};
+var xxx = setInterval(() => {
+        var p1 = document.getElementsByClassName('tank')[0],
+            p2 = document.getElementsByClassName('tank')[1],
+            pbg1 = document.getElementsByClassName('tank-ctn')[0],
+            pbg2 = document.getElementsByClassName('tank-ctn')[1],
+            hpp1 = document.getElementsByClassName('hp')[0],
+            hpp2 = document.getElementsByClassName('hp')[1]
 
-    hpp1.style.width = hp1 + '%';
-    hpp2.style.width = hp2 + '%';
-    p1.style.transform = `rotate(${rota[h1]}deg)`
-    p2.style.transform = `rotate(${rota[h2]}deg)`
-});
+        if (keys[39]) {
+            //right
+            h1 = 1;
+            let pos = parseInt(String(pbg1.style.left).replace('px', '')) + 5;
+            pos = outWall(pos);
+            pbg1.style.left = pos + 'px';
+        }
+        if (keys[37]) {
+            //left
+            h1 = 3;
+            let pos = parseInt(String(pbg1.style.left).replace('px', '')) - 5;
+            pos = outWall(pos);
+            pbg1.style.left = pos + 'px';
+        }
+        if (keys[40]) {
+            //down
+            h1 = 2;
+            let pos = parseInt(String(pbg1.style.top).replace('px', '')) + 5;
+            pos = outWall(pos);
+            pbg1.style.top = pos + 'px';
+        }
+        if (keys[38]) {
+            //up
+            h1 = 0;
+            let pos = parseInt(String(pbg1.style.top).replace('px', '')) - 5;
+            pos = outWall(pos);
+            pbg1.style.top = pos + 'px';
+        }
 
-document.addEventListener('keypress', function(event) {
-    if (!game) {
-        return;
-    }
-    var p1 = document.getElementsByClassName('tank')[0],
-        p2 = document.getElementsByClassName('tank')[1],
-        pbg1 = document.getElementsByClassName('tank-ctn')[0],
-        pbg2 = document.getElementsByClassName('tank-ctn')[1],
-        hpp1 = document.getElementsByClassName('hp')[0],
-        hpp2 = document.getElementsByClassName('hp')[1]
-    if (event.keyCode == 32 && isf2) {
-        isf2 = false;
-        let wallGame = document.getElementsByClassName('wall')[0];
-        wallGame.innerHTML += `<div class="bullet ${++slbl} ${h2}"></div>`
-        let bl = document.getElementsByClassName('bullet');
-        let pos = getAndchoose(pbg2.style.left, pbg2.style.top, h2);
-        bl[bl.length - 1].style.left = pos.x;
-        bl[bl.length - 1].style.top = pos.y;
-        bl[bl.length - 1].style.transform = `rotate(${rota[h2]}deg)`;
-    }
-    if (event.keyCode == 13 && isf1) {
-        isf1 = false;
-        let wallGame = document.getElementsByClassName('wall')[0];
-        wallGame.innerHTML += `<div class="bullet ${++slbl} ${h1}"></div>`
-        let bl = document.getElementsByClassName('bullet');
-        let pos = getAndchoose(pbg1.style.left, pbg1.style.top, h1);
-        bl[bl.length - 1].style.left = pos.x;
-        bl[bl.length - 1].style.top = pos.y;
-        bl[bl.length - 1].style.transform = `rotate(${rota[h1]}deg)`;
-    }
-})
+        ////
+        if (keys[68]) {
+            //right
+            h2 = 1;
+            let pos = parseInt(String(pbg2.style.left).replace('px', '')) + 5;
+            pos = outWall(pos);
+            pbg2.style.left = pos + 'px';
+        }
+        if (keys[65]) {
+            //left
+
+            h2 = 3;
+            let pos = parseInt(String(pbg2.style.left).replace('px', '')) - 5;
+            pos = outWall(pos);
+            pbg2.style.left = pos + 'px';
+        }
+        if (keys[83]) {
+            //down
+            h2 = 2;
+            let pos = parseInt(String(pbg2.style.top).replace('px', '')) + 5;
+            pos = outWall(pos);
+            pbg2.style.top = pos + 'px';
+        }
+        if (keys[87]) {
+            //up
+            h2 = 0;
+            let pos = parseInt(String(pbg2.style.top).replace('px', '')) - 5;
+            pos = outWall(pos);
+            pbg2.style.top = pos + 'px';
+        }
+
+        if (keys[32] && isf2) {
+            isf2 = false;
+            let wallGame = document.getElementsByClassName('wall')[0];
+            wallGame.innerHTML += `<div class="bullet ${++slbl} ${h2}"></div>`
+            let bl = document.getElementsByClassName('bullet');
+            let pos = getAndchoose(pbg2.style.left, pbg2.style.top, h2);
+            bl[bl.length - 1].style.left = pos.x;
+            bl[bl.length - 1].style.top = pos.y;
+            bl[bl.length - 1].style.transform = `rotate(${rota[h2]}deg)`;
+        }
+        if (keys[13] && isf1) {
+            isf1 = false;
+            let wallGame = document.getElementsByClassName('wall')[0];
+            wallGame.innerHTML += `<div class="bullet ${++slbl} ${h1}"></div>`
+            let bl = document.getElementsByClassName('bullet');
+            let pos = getAndchoose(pbg1.style.left, pbg1.style.top, h1);
+            bl[bl.length - 1].style.left = pos.x;
+            bl[bl.length - 1].style.top = pos.y;
+            bl[bl.length - 1].style.transform = `rotate(${rota[h1]}deg)`;
+        }
+        hpp1.style.width = hp1 + '%';
+        hpp2.style.width = hp2 + '%';
+        p1.style.transform = `rotate(${rota[h1]}deg)`
+        p2.style.transform = `rotate(${rota[h2]}deg)`
+    }, 10)
+    // document.addEventListener('keyup', (event) => {
+    //     console.log(keys)
+
+// });
