@@ -232,6 +232,8 @@ document.onkeydown = document.onkeyup = (event) => {
         keys[event.keyCode] = false;
     }
 };
+var old_pos_1 = { x: '275px', y: '200px' },
+    old_pos_2 = { x: '275px', y: '400px' };
 var xxx = setInterval(() => {
     if (!game) {
         clearInterval(xxx);
@@ -241,15 +243,11 @@ var xxx = setInterval(() => {
         pbg1 = document.getElementsByClassName('tank-ctn')[0],
         pbg2 = document.getElementsByClassName('tank-ctn')[1],
         hpp = document.getElementsByClassName('hp');
-
     if (keys[39]) {
         //right
         h1 = 1;
         let pos = parseInt(String(pbg1.style.left).replace('px', '')) + 2;
         pos = outWall(pos);
-        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
-            pos -= 2;
-        }
         pbg1.style.left = pos + 'px';
     }
     if (keys[37]) {
@@ -257,9 +255,6 @@ var xxx = setInterval(() => {
         h1 = 3;
         let pos = parseInt(String(pbg1.style.left).replace('px', '')) - 2;
         pos = outWall(pos);
-        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
-            pos += 2;
-        }
         pbg1.style.left = pos + 'px';
     }
     if (keys[40]) {
@@ -267,9 +262,6 @@ var xxx = setInterval(() => {
         h1 = 2;
         let pos = parseInt(String(pbg1.style.top).replace('px', '')) + 2;
         pos = outWall(pos);
-        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
-            pos -= 2;
-        }
         pbg1.style.top = pos + 'px';
     }
     if (keys[38]) {
@@ -277,9 +269,6 @@ var xxx = setInterval(() => {
         h1 = 0;
         let pos = parseInt(String(pbg1.style.top).replace('px', '')) - 2;
         pos = outWall(pos);
-        if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
-            pos += 2;
-        }
         pbg1.style.top = pos + 'px';
     }
 
@@ -289,9 +278,6 @@ var xxx = setInterval(() => {
         h2 = 1;
         let pos = parseInt(String(pbg2.style.left).replace('px', '')) + 2;
         pos = outWall(pos);
-        if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
-            pos -= 2;
-        }
         pbg2.style.left = pos + 'px';
     }
     if (keys[65]) {
@@ -300,9 +286,6 @@ var xxx = setInterval(() => {
         h2 = 3;
         let pos = parseInt(String(pbg2.style.left).replace('px', '')) - 2;
         pos = outWall(pos);
-        if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
-            pos += 2;
-        }
         pbg2.style.left = pos + 'px';
     }
     if (keys[83]) {
@@ -310,9 +293,6 @@ var xxx = setInterval(() => {
         h2 = 2;
         let pos = parseInt(String(pbg2.style.top).replace('px', '')) + 2;
         pos = outWall(pos);
-        if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
-            pos -= 2;
-        }
         pbg2.style.top = pos + 'px';
     }
     if (keys[87]) {
@@ -320,9 +300,6 @@ var xxx = setInterval(() => {
         h2 = 0;
         let pos = parseInt(String(pbg2.style.top).replace('px', '')) - 2;
         pos = outWall(pos);
-        if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
-            pos += 2;
-        }
         pbg2.style.top = pos + 'px';
     }
 
@@ -356,18 +333,16 @@ var xxx = setInterval(() => {
     p1.style.transform = `rotate(${rota[h1]}deg)`
     p2.style.transform = `rotate(${rota[h2]}deg)`
     if (isCollect(pbg1, $('.wl')) || isCollect(pbg1, $('.fort').eq(0)) || isCollect(pbg1, $('.fort').eq(1))) {
-        let x = parseInt(String(pbg1.style.left).replace('px', ''));
-        let y = parseInt(String(pbg1.style.top).replace('px', ''));
-        let pos = ccc(x, y, h1);
-        pbg1.style.left = outWall(pos.x);
-        pbg1.style.top = outWall(pos.y);
+        pbg1.style.left = old_pos_1.x;
+        pbg1.style.top = old_pos_1.y;
+    } else {
+        old_pos_1 = { x: pbg1.style.left, y: pbg1.style.top };
     }
     if (isCollect(pbg2, $('.wl')) || isCollect(pbg2, $('.fort').eq(0)) || isCollect(pbg2, $('.fort').eq(1))) {
-        let x = parseInt(String(pbg2.style.left).replace('px', ''));
-        let y = parseInt(String(pbg2.style.top).replace('px', ''));
-        let pos = ccc(x, y, h2);
-        pbg2.style.left = outWall(pos.x);
-        pbg2.style.top = outWall(pos.y);
+        pbg2.style.left = old_pos_2.x;
+        pbg2.style.top = old_pos_2.y;
+    } else {
+        old_pos_2 = { x: pbg2.style.left, y: pbg2.style.top };
     }
 
     let pos2 = { y: outWall(parseInt(String(pbg2.style.top).replace('px', ''))), x: outWall(parseInt(String(pbg2.style.left).replace('px', ''))) };
